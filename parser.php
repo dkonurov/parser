@@ -15,13 +15,13 @@ include('config.php');
 require 'simple_html_dom.php';
 
 function find_key($string){
-  $a= iconv("utf-8","cp1251","а");
+  $a= "а";
   $key_a  = substr_count($string, $a);
-  $o = iconv("utf-8","cp1251","о");
+  $o = "о";
   $key_o  = substr_count($string, $o);
-  $t = iconv("utf-8", "cp1251", "т");
+  $t = "т";
   $key_t  = substr_count($string, $t);
-  $k = iconv("utf-8", "cp1251", "к");
+  $k = "к";
   $key_k  = substr_count($string, $k);
 
   $key = $key_a.$key_k.$key_t.$key_o;
@@ -31,13 +31,14 @@ function find_key($string){
 $bashorg = file_get_html('http://bash.im');
 $nextjoke = file_get_html('http://nextjoke.net/');
 
-mysql_set_charset('cp1251');
+mysql_set_charset('utf-8');
 $real[]=0;
 $m=0;
 $i=0;
 foreach($bashorg->find('[class=quote]') as $s){
   $text=nl2br($s->children(1)->plaintext);
   $text = nl2br($s->children(1)->plaintext);
+  $text=iconv("cp1251", "utf-8", $text);
   $s->children(0)->children(6)->class="link";
   if (!empty($text)){
   $s->children(0)->children(6)->innertext="bashorg";
@@ -61,7 +62,6 @@ foreach($bashorg->find('[class=quote]') as $s){
     if ($schet==$k){ 
   if ($i<3){
 
-  $vktext = iconv('windows-1251', 'UTF-8', $text);
   $vktext = str_replace("<br />", "", $vktext);
   $vktext = str_replace("&quot;", "\"", $vktext);
   
@@ -72,6 +72,7 @@ foreach($bashorg->find('[class=quote]') as $s){
   $i++;
   }
   $text=mysql_real_escape_string($text);
+  echo $text;
 
   $massive = array("url"=>$a,"text"=>$text,"rating"=>$rating,"date"=>$date, "key"=>$key);
   $real[]=$massive;
@@ -89,7 +90,7 @@ foreach ($nextjoke->find('[class=joke-cell]') as $e){
   $e->children[0]->class="link";
   $a=$e->children[0];
   $a=mysql_real_escape_string($a);
-  $text = nl2br(iconv('UTF-8', 'cp1251', $e->children[1]->plaintext));
+  $text = $e->children[1]->plaintext;
   $date = date("Y-m-d");
   $rating = mt_rand(0,10);
   $key = find_key($text);
@@ -139,4 +140,5 @@ if (count($real)>0){
     $result = mysql_query($sql) or die(mysql_error());
 }
 }
+
 ?>

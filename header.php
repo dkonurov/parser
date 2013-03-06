@@ -25,7 +25,7 @@ if (name=='up')
  parent.html(html);
  } 
  });
-}
+}С‡С‡С‡
 else
 {;
  $.ajax({
@@ -45,14 +45,15 @@ return false;
  });
 </script>
 
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?
-echo "<meta charset=\"cp1251\">";
-echo "<a style=\"margin-left:375px;;\" href=\"/parser/index.php\">Главная</a>";
-echo "<a style=\"margin-left:30px;;\" href=\"/parser/random.php\">Случайные</a>";
-echo "<a style=\"margin-left:30px;;\" href=\"/parser/top.php\">Топ</a>";
+echo "<a style=\"margin-left:375px;;\" href=\"/parser/index.php\">Р“Р»Р°РІРЅР°СЏ</a>";
+echo "<a style=\"margin-left:30px;;\" href=\"/parser/random.php\">РЎР»СѓС‡Р°Р№РЅС‹Рµ</a>";
+echo "<a style=\"margin-left:30px;;\" href=\"/parser/top.php\">РўРѕРї</a>";
 include("config.php");	
 echo '<link rel="stylesheet" type="text/css" href="style.css">';
-mysql_set_charset('cp1251');
 ?>
 <form action="search.php">
 	<input type="text" name="search">

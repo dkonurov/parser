@@ -2,7 +2,7 @@
 include("header.php");
 include("config.php");	
 echo '<link rel="stylesheet" type="text/css" href="style.css">';
-mysql_set_charset('cp1251');
+mysql_set_charset('utf-8');
 
 //êîë-âî çàïèñåé
 #$res = mysql_query("SELECT COUNT(*) FROM quotes");
@@ -48,6 +48,7 @@ if (mysql_num_rows($result) > 0) {
 		$url = $row['url'];
 		$rating = $row['rating'];
 		$msg = $row['msg'];
+
 		$date = $row['date'];
 	
 		echo "<div id='header'>";
@@ -62,7 +63,8 @@ if (mysql_num_rows($result) > 0) {
 		echo "<div id='link'>$url</div>";
 		echo "</div>";
 		echo "<div id='content'>";
-		echo "$msg";;
+		echo "$msg";
+		echo mb_detect_encoding($msg);
 		echo "</div>";
 
 echo "<br>";

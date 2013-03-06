@@ -2,13 +2,7 @@
 include("header.php");
 include("config.php");	
 echo '<link rel="stylesheet" type="text/css" href="style.css">';
-mysql_set_charset('cp1251');
-
-#$res = mysql_query("SELECT COUNT(*) FROM quotes");
-#$row = mysql_fetch_row($res);
-#$total = $row[0];
-#echo $total;
-
+mysql_set_charset('utf-8');
 
 
 
@@ -32,7 +26,6 @@ echo " "; echo $currpage; echo " ";
 echo "<a style=\"text-decoration:none;\" href=\"/parser/index.php?page=$nextpage\">></a>";
 
 $query = "SELECT * FROM `quotes` LIMIT $c, 20 ";
-#'SELECT * FROM `quotes` ORDER BY date DESC LIMIT 50'
 $result = mysql_query($query)
         or trigger_error(mysql_errno() . ' ' . 
             mysql_error() . ' query: ' . $sql);

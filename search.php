@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include 'header.php';
 include 'config.php';
+mysql_set_charset('utf-8');
 if ($_GET['search']){
 	if (!$_GET['page']){
 	$currpage = 1;
@@ -14,6 +15,7 @@ if ($_GET['search']){
 	$search=$_GET['search'];
 	$c = $currpage*20 - 20;
 	$query ="SELECT * FROM quotes WHERE msg or id LIKE '%$search%'";
+	print $query;
 	$result = mysql_query($query);
 	if (mysql_num_rows($result)>20){
 		$query ="SELECT * FROM quotes WHERE msg or id LIKE '%$search%' LIMIT $c, 20";

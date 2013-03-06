@@ -3,7 +3,7 @@ include("header.php");
 include("config.php");	
 
 echo '<link rel="stylesheet" type="text/css" href="style.css">';
-mysql_set_charset('cp1251');
+mysql_set_charset('utf-8');
 
 $query = "SELECT * FROM quotes ORDER BY RAND() LIMIT 50";
 
