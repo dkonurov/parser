@@ -25,7 +25,7 @@ if (name=='up')
  parent.html(html);
  } 
  });
-}ччч
+}
 else
 {;
  $.ajax({

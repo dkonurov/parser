@@ -4,6 +4,9 @@ include("config.php");
 echo '<link rel="stylesheet" type="text/css" href="style.css">';
 mysql_set_charset('utf-8');
 
+$res = mysql_query("SELECT COUNT(*) FROM quotes");
+$row = mysql_fetch_row($res);
+$total = $row[0];
 
 
 
@@ -23,9 +26,10 @@ $c = $currpage*20 - 20;
 echo "<br>";
 echo "<a style=\"margin-left:600px;text-decoration:none;\" href=\"/parser/index.php?page=$prevpage\"><</a>";
 echo " "; echo $currpage; echo " ";
+if ($c+20<$total){
 echo "<a style=\"text-decoration:none;\" href=\"/parser/index.php?page=$nextpage\">></a>";
-
-$query = "SELECT * FROM `quotes` LIMIT $c, 20 ";
+}
+$query = "SELECT * FROM `quotes` ORDER BY id DESC LIMIT $c, 20 ";
 $result = mysql_query($query)
         or trigger_error(mysql_errno() . ' ' . 
             mysql_error() . ' query: ' . $sql);
@@ -49,14 +53,17 @@ if (mysql_num_rows($result) > 0) {
 		echo "<div id='link'>$url</div>";
 		echo "</div>";
 		echo "<div id='content'>";
-		echo "$msg";;
+		echo "$msg";
 		echo "</div>";
 
 echo "<br>";
 
 	}
 	}
+
 echo "<a style=\"margin-left:600px;text-decoration:none;\" href=\"/parser/index.php?page=$prevpage\"><</a>";
 echo " "; echo $currpage; echo " ";
+if ($c+20<$total){
 echo "<a style=\"text-decoration:none;\" href=\"/parser/index.php?page=$nextpage\">></a>";
+}
 ?>

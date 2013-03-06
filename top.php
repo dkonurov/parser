@@ -64,7 +64,6 @@ if (mysql_num_rows($result) > 0) {
 		echo "</div>";
 		echo "<div id='content'>";
 		echo "$msg";
-		echo mb_detect_encoding($msg);
 		echo "</div>";
 
 echo "<br>";

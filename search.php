@@ -1,7 +1,7 @@
 <?php
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 
-ini_set('display_errors', 1);
+//ini_set('display_errors', 1);
 include 'header.php';
 include 'config.php';
 mysql_set_charset('utf-8');
@@ -15,8 +15,9 @@ if ($_GET['search']){
 	$search=$_GET['search'];
 	$c = $currpage*20 - 20;
 	$query ="SELECT * FROM quotes WHERE msg or id LIKE '%$search%'";
-	print $query;
+	$k=mysql_num_rows($result);
 	$result = mysql_query($query);
+	$k=mysql_num_rows($result);
 	if (mysql_num_rows($result)>20){
 		$query ="SELECT * FROM quotes WHERE msg or id LIKE '%$search%' LIMIT $c, 20";
 		$result = mysql_query($query);
@@ -28,7 +29,9 @@ if ($_GET['search']){
 		echo "<br>";
 		echo "<a style=\"margin-left:600px;text-decoration:none;\" href=\"/parser/search.php?search=$search&page=$prevpage\"><</a>";
 		echo " "; echo $currpage; echo " ";
+		if ($c+20<$k){
 		echo "<a style=\"text-decoration:none;\" href=\"/parser/search.php?search=$search&page=$nextpage\">></a>";
+	}
 	}
 if (mysql_num_rows($result) > 0) {
 	while ($row = mysql_fetch_assoc($result)) {

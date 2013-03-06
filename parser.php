@@ -72,7 +72,6 @@ foreach($bashorg->find('[class=quote]') as $s){
   $i++;
   }
   $text=mysql_real_escape_string($text);
-  echo $text;
 
   $massive = array("url"=>$a,"text"=>$text,"rating"=>$rating,"date"=>$date, "key"=>$key);
   $real[]=$massive;
